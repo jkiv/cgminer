@@ -469,6 +469,18 @@ if test "x$sp30" = xyes; then
 fi
 AM_CONDITIONAL([HAS_SP30], [test x$sp30 = xyes])
 
+dummy="no"
+
+AC_ARG_ENABLE([dummy],
+	[AC_HELP_STRING([--enable-dummy],[Compile support for Dummy(default disabled)])],
+	[dummy=$enableval]
+	)
+if test "x$dummy" = xyes; then
+	AC_DEFINE([USE_DUMMY], [1], [Defined to 1 if Dummy support is wanted])
+	drivercount=x$drivercount
+	standalone="yes"
+fi
+AM_CONDITIONAL([HAS_DUMMY], [test x$dummy = xyes])
 
 forcecombo="no"
 
@@ -876,8 +888,14 @@ else
 	echo "  ModMiner.FPGAs.......: Disabled"
 fi
 
+if test "x$dummy" = xyes; then
+	echo "  Dummy.......: Enabled"
+else
+	echo "  Dummy.......: Disabled"
+fi
+
 #Add any new device to this, along with a no on the end of the test
-if test "x$avalon$avalon2$avalon4$avalon7$avalon_miner$bab$bflsc$bitforce$bitfury$bitfury16$blockerupter$hashfast$hashratio$icarus$klondike$knc$modminer$drillbit$minion$cointerra$bitmine_A1$ants1$ants2$ants3$sp10$sp30" = xnononononononononononononononononononononononononono; then
+if test "x$avalon$avalon2$avalon4$avalon7$avalon_miner$bab$bflsc$bitforce$bitfury$bitfury16$blockerupter$hashfast$hashratio$icarus$klondike$knc$modminer$drillbit$minion$cointerra$bitmine_A1$ants1$ants2$ants3$sp10$sp30$dummy" = xnonononononononononononononononononononononononononono; then
 	echo
 	AC_MSG_ERROR([No mining devices configured in])
 	echo
