@@ -239,7 +239,8 @@ static inline int fsync (int fd)
  * listed driver. */
 #define FPGA_PARSE_COMMANDS(DRIVER_ADD_COMMAND) \
 	DRIVER_ADD_COMMAND(bitforce) \
-	DRIVER_ADD_COMMAND(modminer)
+	DRIVER_ADD_COMMAND(modminer) \
+	DRIVER_ADD_COMMAND(dummy)
 
 #define ASIC_PARSE_COMMANDS(DRIVER_ADD_COMMAND) \
 	DRIVER_ADD_COMMAND(ants1) \
