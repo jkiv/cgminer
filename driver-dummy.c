@@ -61,12 +61,6 @@ void dummy_detect(bool __maybe_unused hotplug)
   }
 }
 
-/* Which hash work loop this driver uses. */
-void dummy_hash_work(struct thr_info *thr)
-{
-  applog(LOG_INFO, "dummy_hash_work()");
-}
-
 /* Tell the driver of a block change */
 static void dummy_flush_work(struct cgpu_info *cgpu)
 {
@@ -126,7 +120,7 @@ static int64_t dummy_scanhash(struct thr_info *thr, struct work *work, int64_t w
   applog(LOG_INFO, "  .share_diff");
   applog(LOG_INFO, "    %lld", work->share_diff);
 
-  usleep(60000000); // Simulate work
+  sleep(60); // Simulate work
 
   return 0; // TODO what does return value represent?
 }
@@ -142,7 +136,7 @@ static int64_t dummy_scanwork(struct thr_info *thr)
 
   if (!work) {
     applog(LOG_ERR, "dummy_scanwork: call to get_work() failed.");
-    return;
+    return; // TODO what does return value represent?
   }
 
   unsigned char *p;
@@ -169,7 +163,7 @@ static int64_t dummy_scanwork(struct thr_info *thr)
   applog(LOG_INFO, "  .share_diff");
   applog(LOG_INFO, "    %lld", work->share_diff);
 
-  usleep(60000000); // Simulate work
+  sleep(60); // Simulate work
 
   /* return value is number of nonces that have been checked since
    * previous call
